@@ -56,7 +56,10 @@ public class levelCreate : MonoBehaviour {
             name = _name.text,
             levelData = _levelDoc,
         };
- 
+        user.totalEnemies = user.totalBosses = user.levelData.Split("Boss").Length - 1;
+        user.totalEnemies += user.levelData.Split("SmallEnemy").Length - 1;
+        Debug.Log(user.totalEnemies);
+        Debug.Log(user.totalBosses);
         var body = JsonUtility.ToJson(user);
         Debug.Log(body);
         
@@ -70,6 +73,8 @@ public class levelCreate : MonoBehaviour {
         user = null;
 
     }
+
+    
 }
 
 public class UserLevel
@@ -77,4 +82,6 @@ public class UserLevel
     public string userId;
     public string name;
     public string levelData;
+    public int totalEnemies;
+    public int totalBosses;
 }
