@@ -4,7 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using System.IO;
-
+using System.Linq;
+using System.Collections.Generic;
+using System;
 [System.Serializable]
 public class Level
 {
@@ -35,6 +37,7 @@ public class showAllLevels : MonoBehaviour
     public Transform scroll;
     public leveling lsx;
     public User usuario;
+    public List<User> usuarios = new List<User>();
 
     private void Start()
     {
@@ -66,16 +69,37 @@ public class showAllLevels : MonoBehaviour
         }
         GameObject.Find("Retain").gameObject.GetComponent<RetainOnLoad>().lvl = lsx.ls;
 
+        List<Level> Sorted = lsx.ls.OrderBy(x => x.id).ToList();
         if (load)
-            dislpayLevels(lsx.ls);
+            dislpayLevels(Sorted);
         load = false;
     }
 
     public void dislpayLevels(List<Level> levels)
     {
+
         for (int i = 0; i < levels.Count; i++)
         {
             StartCoroutine(Get(levels[i].userId, i, levels));
+        }
+        for(int i = 0; i < levels.Count; i++)
+        {
+            GameObject displayItem = Instantiate(levelEntryItem, transform.position, Quaternion.identity);
+            displayItem.transform.SetParent(scroll);
+            displayItem.GetComponent<entryData>().lvlName = levels[i].name;
+            displayItem.GetComponent<entryData>().lvlID = levels[i].id.ToString();
+            string username = "";
+            for(int j = 0; j < usuarios.Count; j++)
+            {
+                if(usuarios[j].id == levels[i].userId)
+                {
+                    username = usuarios[j].username;
+                    break;
+                }
+            }
+            displayItem.GetComponent<entryData>().lvlCreator = username;
+            displayItem.GetComponent<entryData>().lvlData = levels[i].levelData;
+            usuario = null;
         }
     }
 
@@ -97,15 +121,11 @@ public class showAllLevels : MonoBehaviour
             {
                 Debug.Log("Error: " + www.error);
             }
+
+            usuarios.Add(usuario);
         }
 
-        GameObject displayItem = Instantiate(levelEntryItem, transform.position, Quaternion.identity);
-        displayItem.transform.SetParent(scroll);
-        displayItem.GetComponent<entryData>().lvlName = levels[i].name;
-        displayItem.GetComponent<entryData>().lvlID = levels[i].id.ToString();
-        displayItem.GetComponent<entryData>().lvlCreator = usuario.username;
-        displayItem.GetComponent<entryData>().lvlData = levels[i].levelData;
-        usuario = null;
+      
     }
 }
 
