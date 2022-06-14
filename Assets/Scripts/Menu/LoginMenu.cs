@@ -60,9 +60,4 @@ public class LoginMenu : MonoBehaviour
         else
             StartCoroutine(GetUser());
     }
-
-    public void QuitGame() 
-    {
-        Application.Quit();
-    }
 }
