@@ -7,6 +7,8 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 
+
+[System.Serializable]
 public class User
 {
     public int id;

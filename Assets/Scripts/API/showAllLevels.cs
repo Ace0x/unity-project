@@ -25,6 +25,13 @@ public class leveling
 {
     public List<Level> ls;
 }
+
+
+[System.Serializable]
+public class Users
+{
+    public List<User> u;
+}
 public class showAllLevels : MonoBehaviour
 {
     public List<Level> Levels;
@@ -34,6 +41,7 @@ public class showAllLevels : MonoBehaviour
     public GameObject levelEntryItem;
     public Transform scroll;
     public leveling lsx;
+    public Users users;
     public User usuario;
 
     private void Start()
@@ -47,11 +55,12 @@ public class showAllLevels : MonoBehaviour
         StartCoroutine(GetLevels());
     }
 
+
     public IEnumerator GetLevels()
     {
         using (UnityWebRequest www = UnityWebRequest.Get(constring))
         {
-            Levels = new List<Level>();
+            
             yield return www.SendWebRequest();
             if (www.result == UnityWebRequest.Result.Success)
             {
@@ -64,8 +73,30 @@ public class showAllLevels : MonoBehaviour
                 Debug.Log("Error: " + www.error);
             }
         }
-        GameObject.Find("Retain").gameObject.GetComponent<RetainOnLoad>().lvl = lsx.ls;
 
+        using (UnityWebRequest www = UnityWebRequest.Get($"https://api-heavent.herokuapp.com/users"))
+        {
+        
+            yield return www.SendWebRequest();
+
+            if (www.result == UnityWebRequest.Result.Success)
+            {
+                if (www.downloadHandler.text != "null")
+                {
+                    string raw = www.downloadHandler.text;
+                    string raw2 = "{ \"u\":" + raw + "}";
+                 
+                    users = JsonUtility.FromJson<Users>(raw2);
+                  
+                }
+            }
+            else
+            {
+                Debug.Log("Error: " + www.error);
+            }
+        }
+        GameObject.Find("Retain").gameObject.GetComponent<RetainOnLoad>().lvl = lsx.ls;
+        lsx.ls.Sort((x, y) => x.id.CompareTo(y.id));
         if (load)
             dislpayLevels(lsx.ls);
         load = false;
@@ -75,37 +106,24 @@ public class showAllLevels : MonoBehaviour
     {
         for (int i = 0; i < levels.Count; i++)
         {
-            StartCoroutine(Get(levels[i].userId, i, levels));
-        }
-    }
-
-    IEnumerator Get(int user, int i, List<Level> levels)
-    {
-        using (UnityWebRequest www = UnityWebRequest.Get($"https://api-heavent.herokuapp.com/users/{user}"))
-        {
-            yield return www.SendWebRequest();
-            
-            if (www.result == UnityWebRequest.Result.Success)
+            GameObject displayItem = Instantiate(levelEntryItem, transform.position, Quaternion.identity);
+            displayItem.transform.SetParent(scroll);
+            displayItem.GetComponent<entryData>().lvlName = levels[i].name;
+            displayItem.GetComponent<entryData>().lvlID = levels[i].id.ToString();
+         
+            for(int j = 0; j < users.u.Count; j++)
             {
-                if(www.downloadHandler.text != "null")
-                {   
-                    string raw = www.downloadHandler.text;
-                    usuario = JsonUtility.FromJson<User>(raw);
+                if (users.u[j].id == levels[i].userId)
+                {
+                    displayItem.GetComponent<entryData>().lvlCreator = users.u[j].username;
+                    break;
                 }
             }
-            else
-            {
-                Debug.Log("Error: " + www.error);
-            }
+            displayItem.GetComponent<entryData>().lvlData = levels[i].levelData;
+            usuario = null;
         }
-
-        GameObject displayItem = Instantiate(levelEntryItem, transform.position, Quaternion.identity);
-        displayItem.transform.SetParent(scroll);
-        displayItem.GetComponent<entryData>().lvlName = levels[i].name;
-        displayItem.GetComponent<entryData>().lvlID = levels[i].id.ToString();
-        displayItem.GetComponent<entryData>().lvlCreator = usuario.username;
-        displayItem.GetComponent<entryData>().lvlData = levels[i].levelData;
-        usuario = null;
     }
+
+
 }
 

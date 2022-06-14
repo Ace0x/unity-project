@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
                 player = spawnPoint.transform.GetChild(0).gameObject.GetComponent<Player>();
             }
 
-        if (weapon == null && player != null && spawnPoint != null)
+        if (GameObject.Find("Weapon") != null && player != null && spawnPoint != null)
             weapon = GameObject.Find("Weapon").gameObject.GetComponent<Weapon>();
             
         if (si == null && GameObject.Find("Player") != null)
