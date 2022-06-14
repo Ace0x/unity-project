@@ -33,18 +33,20 @@ public class LevelStats : MonoBehaviour
         User usr = retain.usr;
         int lvlid = retain.currentLevelId;
         string send = $"https://api-heavent.herokuapp.com/level_stats/{usr.id}/{lvlid}";
+        
         using (UnityWebRequest www = UnityWebRequest.Get(send))
         {
             yield return www.SendWebRequest();
+
             if (www.result != UnityWebRequest.Result.Success)
                 Debug.Log("Error: " + www.error);
             else
             {
                 string raw = www.downloadHandler.text;
+
                 if(raw == "null")
                 {
                     string postJson = "{" + $"\"levelId\":{retain.currentLevelId},\"userId\":{usr.id},\"time\":{seg},\"victories\":{vic},\"deaths\":{deth}" + "}";
-
                     StartCoroutine(Create(postJson));
                 }
                 else
@@ -59,6 +61,7 @@ public class LevelStats : MonoBehaviour
                     sendDeath += deth;
                     string postJson;
                     string url;
+
                     if(vic == 1)
                     {
                         postJson = "{" + $"\"time\":{sendSeg},\"victories\":{sendVictor}" + "}";
@@ -84,6 +87,7 @@ public class LevelStats : MonoBehaviour
     {
         User usr = GameObject.Find("Retain").gameObject.GetComponent<RetainOnLoad>().usr;
         int lvlid = GameObject.Find("Retain").gameObject.GetComponent<RetainOnLoad>().currentLevelId;
+
         using (UnityWebRequest www = UnityWebRequest.Put($"https://api-heavent.herokuapp.com/level_stats", contents))
         {
             www.method = "POST";
@@ -111,13 +115,10 @@ public class LevelStats : MonoBehaviour
             yield return www.SendWebRequest();
 
             if (www.result != UnityWebRequest.Result.Success)
-                Debug.Log("Error: " + www.error);
-            
+                Debug.Log("Error: " + www.error);            
         }
 
         usr = null;
         Destroy(gameObject);
     }
-
-
 }
