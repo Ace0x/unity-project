@@ -8763,7 +8763,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 112879968564088602, guid: 0932133cd3efd2e4a9af6bbde0a69488, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 574
+      value: 696
       objectReference: {fileID: 0}
     - target: {fileID: 112879968564088602, guid: 0932133cd3efd2e4a9af6bbde0a69488, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -8913,13 +8913,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameObjects
       objectReference: {fileID: 0}
+    - target: {fileID: 8919871255513221157, guid: 0932133cd3efd2e4a9af6bbde0a69488, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8919871255513221157, guid: 0932133cd3efd2e4a9af6bbde0a69488, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8919871255513221157, guid: 0932133cd3efd2e4a9af6bbde0a69488, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8919871255513221159, guid: 0932133cd3efd2e4a9af6bbde0a69488, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 8919871255513221159, guid: 0932133cd3efd2e4a9af6bbde0a69488, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -157
+      value: -264.00684
+      objectReference: {fileID: 0}
+    - target: {fileID: 8919871255977005444, guid: 0932133cd3efd2e4a9af6bbde0a69488, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8919871255977005444, guid: 0932133cd3efd2e4a9af6bbde0a69488, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8919871255977005444, guid: 0932133cd3efd2e4a9af6bbde0a69488, type: 3}
+      propertyPath: m_Color.r
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8919871255977005445, guid: 0932133cd3efd2e4a9af6bbde0a69488, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -8927,7 +8951,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8919871255977005445, guid: 0932133cd3efd2e4a9af6bbde0a69488, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -156.99861
+      value: -264
       objectReference: {fileID: 0}
     - target: {fileID: 8919871256416626309, guid: 0932133cd3efd2e4a9af6bbde0a69488, type: 3}
       propertyPath: m_Camera
