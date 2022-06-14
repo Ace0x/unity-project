@@ -34,6 +34,7 @@ public class showAllLevels : MonoBehaviour
     public GameObject levelEntryItem;
     public Transform scroll;
     public leveling lsx;
+    public User usuario;
 
     private void Start()
     {
@@ -74,15 +75,37 @@ public class showAllLevels : MonoBehaviour
     {
         for (int i = 0; i < levels.Count; i++)
         {
-            GameObject displayItem = Instantiate(levelEntryItem, transform.position, Quaternion.identity);
-            displayItem.transform.SetParent(scroll);
-            displayItem.GetComponent<entryData>().lvlName = levels[i].name;
-            displayItem.GetComponent<entryData>().lvlID = levels[i].id.ToString();
-            displayItem.GetComponent<entryData>().lvlCreator = levels[i].userId.ToString();
-            displayItem.GetComponent<entryData>().lvlData = levels[i].levelData;
+            StartCoroutine(Get(levels[i].userId, i, levels));
         }
     }
 
+    IEnumerator Get(int user, int i, List<Level> levels)
+    {
+        using (UnityWebRequest www = UnityWebRequest.Get($"https://api-heavent.herokuapp.com/users/{user}"))
+        {
+            yield return www.SendWebRequest();
+            
+            if (www.result == UnityWebRequest.Result.Success)
+            {
+                if(www.downloadHandler.text != "null")
+                {   
+                    string raw = www.downloadHandler.text;
+                    usuario = JsonUtility.FromJson<User>(raw);
+                }
+            }
+            else
+            {
+                Debug.Log("Error: " + www.error);
+            }
+        }
 
+        GameObject displayItem = Instantiate(levelEntryItem, transform.position, Quaternion.identity);
+        displayItem.transform.SetParent(scroll);
+        displayItem.GetComponent<entryData>().lvlName = levels[i].name;
+        displayItem.GetComponent<entryData>().lvlID = levels[i].id.ToString();
+        displayItem.GetComponent<entryData>().lvlCreator = usuario.username;
+        displayItem.GetComponent<entryData>().lvlData = levels[i].levelData;
+        usuario = null;
+    }
 }
 
