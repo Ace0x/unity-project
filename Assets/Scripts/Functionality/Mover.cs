@@ -18,9 +18,7 @@ public abstract class Mover : Fighter {
 
     protected virtual void Start() {
         boxCollider = GetComponent<BoxCollider2D>();   
-    }
-
-    
+    }    
     
     public IEnumerator Dash()
     {
@@ -30,7 +28,7 @@ public abstract class Mover : Fighter {
         yield return new WaitForSeconds(0.08f);
         xSpeed = 0.75f;
         ySpeed = 1;
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
         dash = false;
     }
 
