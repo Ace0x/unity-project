@@ -35,7 +35,7 @@ public class RetainOnLoad : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().name != "Menu")
+        if (Input.GetKeyDown(KeyCode.T) && SceneManager.GetActiveScene().name != "Menu")
         {
             SceneManager.LoadScene("Menu");
         }
