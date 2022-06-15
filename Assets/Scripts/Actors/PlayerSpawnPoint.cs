@@ -6,15 +6,14 @@ public class PlayerSpawnPoint : MonoBehaviour
 {
     public GameObject Player;
 
-    // Start is called before the first frame update
     void Start()
     {
-        if(GameObject.Find("SpawnPoint(Clone)") == null)
+        if(GameObject.Find("SpawnPoint(Clone)") == null) // renames the object
         {
             gameObject.name = "SpawnPoint";
         }
 
-        if(GameObject.Find("Player(Clone)") == null)
+        if(GameObject.Find("Player(Clone)") == null) // renames the player and sets it as a child
         {
             GameObject pl = GameObject.Instantiate(Player, transform.position, Quaternion.identity) as GameObject;
             pl.name = "Player";
@@ -22,9 +21,9 @@ public class PlayerSpawnPoint : MonoBehaviour
         }
         else
         {
-            if(gameObject.name.Contains( "SpawnPoint"))
+            if(gameObject.name.Contains("SpawnPoint"))
             {
-                GameObject.Find("Player").transform.parent = gameObject.transform;
+                GameObject.Find("Player").transform.parent = gameObject.transform; // gets an existing player and sets it as a child
             }
             else
             {

@@ -10,8 +10,8 @@ public class FloatingTextManager : MonoBehaviour
     // Specific objects defined by a prefab
     public GameObject textPrefab;
     // List of floating text objects
-    //  Instead of creating a new FloatingText object every time one is needed, we utilize
-    //  the same objects and change their parameters
+    // Instead of creating a new FloatingText object every time one is needed, we utilize
+    // the same objects and change their parameters
     private List<FloatingText> floatingTexts = new List<FloatingText>();
 
     // Update the floating text
@@ -35,7 +35,6 @@ public class FloatingTextManager : MonoBehaviour
         floatingText.txt.text = message;
         floatingText.txt.fontSize = fontSize;
         floatingText.txt.color = color;
-        // This requires a transformation from world space (in-scene for game) to screen space (in-screen for UI)
         floatingText.go.transform.position = Camera.main.WorldToScreenPoint(position);
         floatingText.motion = motion;
         floatingText.duration = duration;
