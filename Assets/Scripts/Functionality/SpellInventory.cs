@@ -1,3 +1,15 @@
+/*
+==========================================
+ Title: Spell Inventory
+ Authors: 
+ Andrew Dunkerley, 
+ Emiliano Cabrera, 
+ Diego Corrales, 
+ DO Hyun Nam
+ Date: 14/06/2022
+==========================================
+*/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,7 +44,6 @@ public class SpellInventory : MonoBehaviour {
                     break;
                 }
             }
-            // Pass through the inventory
         
 
 
@@ -83,7 +94,6 @@ public class SpellInventory : MonoBehaviour {
         
      
             // Instantiate the image at the inventory slot position and clarify that
-            //  we do not want to use world coordinates
             
         
     }

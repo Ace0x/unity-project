@@ -1,4 +1,15 @@
-using System.Collections;
+/*
+==========================================
+ Title: Retain On Load
+ Authors: 
+ Andrew Dunkerley, 
+ Emiliano Cabrera, 
+ Diego Corrales, 
+ DO Hyun Nam
+ Date: 14/06/2022
+==========================================
+*/
+
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -35,7 +46,7 @@ public class RetainOnLoad : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T) && SceneManager.GetActiveScene().name != "Menu")
+        if (Input.GetKeyDown(KeyCode.RightControl) && SceneManager.GetActiveScene().name != "Menu")
         {
             SceneManager.LoadScene("Menu");
         }

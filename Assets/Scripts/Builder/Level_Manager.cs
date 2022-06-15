@@ -1,17 +1,28 @@
-using System.Collections;
+/*
+==========================================
+ Title: Level Manager
+ Authors: 
+ Andrew Dunkerley, 
+ Emiliano Cabrera, 
+ Diego Corrales, 
+ DO Hyun Nam
+ Date: 14/06/2022
+==========================================
+*/
+
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using System.Linq;
-using System.IO;
 using UnityEngine.SceneManagement;
 
 public class Level_Manager : MonoBehaviour
 {
     public static Level_Manager instance;
-    public ItemController[] itemButtons;
-    public GameObject[] itemPrefabs;
+    public ItemController[] itemButtons;//list of buttons for referene
+    public GameObject[] itemPrefabs; //list of possible prefabs
     public int currentButton;
+    //tags to be saved
     public string saveAssetTag1 = "Boss";
     public string saveAssetTag2 = "Fighter";
     public string saveAssetTag3 = "Spawn";
@@ -22,8 +33,8 @@ public class Level_Manager : MonoBehaviour
     public GameObject[] possibleObjects;
     public GameObject SpawnPoint;
     private bool flag = false;
-    public List<CustomTile> tiles = new List<CustomTile>();
-    [SerializeField] List<Tilemap> tilemaps = new List<Tilemap>();
+    public List<CustomTile> tiles = new List<CustomTile>();//List of current tiles
+    [SerializeField] List<Tilemap> tilemaps = new List<Tilemap>();//List of current tilemaps
     public Dictionary<int, Tilemap> layers = new Dictionary<int, Tilemap>();
     public string level;
     public string reload;
@@ -36,6 +47,7 @@ public class Level_Manager : MonoBehaviour
 
     private void Awake()
     {
+        //if the lvl Stats item exists the proceed, otherwise look for it until it exists
         if (GameObject.Find("lvlStats") == null && SceneManager.GetActiveScene().name == "LevelLoad")
         {
             i = Instantiate(lvlStatsPrefab, new Vector3Int(0, 0, 0), Quaternion.identity);
@@ -67,10 +79,10 @@ public class Level_Manager : MonoBehaviour
         if (sceneName == "LevelLoad")
         {
             LoadLevel(GameObject.Find("Retain").GetComponent<RetainOnLoad>().currentLvlData, false);
-            Time.timeScale = 1f;
+            Time.timeScale = 1f;//calls load function given a selected level on the level selector
         }
     }
-    public enum Tilemaps
+    public enum Tilemaps//available tilemaps and their layer order for placement purposes
     {
         Floor = 0,
         Design = 1,
@@ -79,6 +91,7 @@ public class Level_Manager : MonoBehaviour
 
     private void Update()
     {
+        //only works if the scene is the editor
         if (sceneName == "Editor")
         {
             Vector2 screenPosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
@@ -87,7 +100,7 @@ public class Level_Manager : MonoBehaviour
             if (Input.GetMouseButtonDown(0) && itemButtons[currentButton].clicked)
             {
                 itemButtons[currentButton].clicked = false;
-                if (itemPrefabs[currentButton].name == "MonsterSpawner")
+                if (itemPrefabs[currentButton].name == "MonsterSpawner")//in case it's a monster spawner activate quantity input popup
                 {
                     SpawnEdit.SetActive(true);
                     var monster = Instantiate(itemPrefabs[currentButton], new Vector3(worldPosition.x, worldPosition.y, 0), Quaternion.identity);
@@ -102,7 +115,7 @@ public class Level_Manager : MonoBehaviour
                     item.transform.SetParent(currentInstance.transform);
                 }
             }
-
+            
             if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.A)) 
                 Savelevel();
             
@@ -121,6 +134,7 @@ public class Level_Manager : MonoBehaviour
         GameObject[] assets4 = GameObject.FindGameObjectsWithTag(saveAssetTag4);
         //GameObject[] assets3 = GameObject.FindGameObjectsWithTag("MainCamera");
         assetsToSave = assets1.Concat(assets2).ToArray().Concat(assets3).ToArray().Concat(assets4).ToArray();
+        //array of all the assets to be saved
 
         foreach (var item in assetsToSave)
         {
@@ -139,7 +153,7 @@ public class Level_Manager : MonoBehaviour
 
         foreach (var layerData in levelData.layers)
         {
-            if (!layers.TryGetValue(layerData.layer_id, out Tilemap tilemap)) break;
+            if (!layers.TryGetValue(layerData.layer_id, out Tilemap tilemap)) break;//if tilemap exists in scene
 
             //check bounds
             BoundsInt bounds = tilemap.cellBounds;
@@ -150,11 +164,11 @@ public class Level_Manager : MonoBehaviour
                 {
                     TileBase temp = tilemap.GetTile(new Vector3Int(x, y, 0));
                 
-                    CustomTile temptile = tiles.Find(t => t.tile == temp);
+                    CustomTile temptile = tiles.Find(t => t.tile == temp);//find custom tile
 
                     if (temptile != null)
                     {
-                        layerData.tiles.Add(temptile.id);
+                        layerData.tiles.Add(temptile.id);//add tile and coordenates
                         layerData.poses_x.Add(x);
                         layerData.poses_y.Add(y);
                     }
@@ -183,11 +197,11 @@ public class Level_Manager : MonoBehaviour
        
         foreach (Tilemap tm in tilemaps)
         {
-            tm.ClearAllTiles();
+            tm.ClearAllTiles();//wipe
         }
         foreach(Transform child in currentInstance.transform)
         {
-            Destroy(child.gameObject);
+            Destroy(child.gameObject);//wipe
         }
 
         LevelData levelData;
@@ -212,6 +226,7 @@ public class Level_Manager : MonoBehaviour
             {
                 
                 tilemap.SetTile(new Vector3Int(data.poses_x[i], data.poses_y[i], 0), tiles.Find(t => t.name == data.tiles[i]).tile);
+                //sets tiles given json
             }
         }
 
@@ -221,7 +236,7 @@ public class Level_Manager : MonoBehaviour
             {
                 flag = true;
                 GameObject obj = Instantiate(SpawnPoint, item.assetPosition, Quaternion.identity);
-                obj.name = obj.name.Replace("(Clone)", "");
+                obj.name = obj.name.Replace("(Clone)", "");//remove clone from created objects
                 obj.transform.SetParent(currentInstance.transform);
             }
         }
@@ -236,11 +251,11 @@ public class Level_Manager : MonoBehaviour
 
         item_creation(levelData);
         Debug.Log("Level was loaded");
-        Invoke("Refill", 0.01f);
+        Invoke("Refill", 0.01f);//refill on reload
 
     }
 
-    void Refill()
+    void Refill()//fills health and faith on reload
     {
         GameManager.instance.player.Heal(GameManager.instance.player.maxHitpoint);
         GameManager.instance.player.GainFaith(GameManager.instance.player.maxFaith);

@@ -1,9 +1,19 @@
+/*
+==========================================
+ Title: Mover
+ Authors: 
+ Andrew Dunkerley, 
+ Emiliano Cabrera, 
+ Diego Corrales, 
+ Do Hyun Nam
+ Date: 14/06/2022
+==========================================
+*/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-// abstract means that it has to be inherited from, it cannot be assigned to an object
 public abstract class Mover : Fighter {
     protected BoxCollider2D boxCollider;
     protected Vector3 moveDelta;
@@ -52,8 +62,7 @@ public abstract class Mover : Fighter {
         // Add push vector
         moveDelta += pushDirection;
 
-        // Reduce the push force every frame, based on the recovery speed
-        // Lerp linearly interpolates between two vectors, approaching the first to the second
+        // Reduce the push force every frame
         pushDirection = Vector3.Lerp(pushDirection, Vector3.zero, pushRecoverySpeed);
 
         hit2D = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(0, moveDelta.y), Mathf.Abs(moveDelta.y * Time.deltaTime), LayerMask.GetMask("Actor", "Blocking"));

@@ -1,5 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
+/*
+==========================================
+ Title: Monster Spawner
+ Authors: 
+ Andrew Dunkerley, 
+ Emiliano Cabrera, 
+ Diego Corrales, 
+ DO Hyun Nam
+ Date: 14/06/2022
+==========================================
+*/
+
+
 using UnityEngine;
 using TMPro;
 using System;

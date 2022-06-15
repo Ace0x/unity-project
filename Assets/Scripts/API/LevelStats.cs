@@ -1,3 +1,14 @@
+/*
+==========================================
+ Title: Level Stats
+ Authors: 
+ Andrew Dunkerley, 
+ Emiliano Cabrera, 
+ Diego Corrales, 
+ Do Hyun Nam
+ Date: 14/06/2022
+==========================================
+*/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,17 +28,17 @@ public class LevelStats : MonoBehaviour
 {
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)){
+        if (Input.GetKeyDown(KeyCode.F2)){ //deletes extra retain on load methods
             Destroy(gameObject);
         }
     }
 
-    public void getData(int seg, int vic, int deth)
+    public void getData(int seg, int vic, int deth) 
     {
         StartCoroutine(Get(seg,vic,deth));
     }
 
-    IEnumerator Get(int seg, int vic, int deth)
+    IEnumerator Get(int seg, int vic, int deth) //either updates or creates level stats entry on DB
     {
         RetainOnLoad retain =  GameObject.Find("Retain").gameObject.GetComponent<RetainOnLoad>();
         User usr = retain.usr;

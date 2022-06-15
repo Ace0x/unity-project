@@ -1,3 +1,14 @@
+/*
+==========================================
+ Title: Player Stats
+ Authors: 
+ Andrew Dunkerley, 
+ Emiliano Cabrera, 
+ Diego Corrales, 
+ Do Hyun Nam
+ Date: 14/06/2022
+==========================================
+*/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +21,7 @@ public class PlayerStats : MonoBehaviour
         StartCoroutine(Post());
     }
 
-    IEnumerator Post()
+    IEnumerator Post() //posts player stats after winning or losing a level
     {
         User usr = GameObject.Find("Retain").gameObject.GetComponent<RetainOnLoad>().usr;
 

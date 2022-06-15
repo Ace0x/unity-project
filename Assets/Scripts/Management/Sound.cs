@@ -1,3 +1,14 @@
+/*
+==========================================
+ Title: Sound
+ Authors: 
+ Andrew Dunkerley, 
+ Emiliano Cabrera, 
+ Diego Corrales, 
+ Do Hyun Nam
+ Date: 14/06/2022
+==========================================
+*/
 using UnityEngine.Audio;
 using UnityEngine;
 

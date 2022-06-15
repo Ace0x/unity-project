@@ -1,10 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
+/*
+==========================================
+ Title: Level Editor
+ Authors: 
+ Andrew Dunkerley, 
+ Emiliano Cabrera, 
+ Diego Corrales, 
+ DO Hyun Nam
+ Date: 14/06/2022
+==========================================
+*/
+
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Tilemaps;
 using UnityEngine.SceneManagement;
-using System.Linq;
+
 
 public class LevelEditor : MonoBehaviour
 {
@@ -56,10 +66,10 @@ public class LevelEditor : MonoBehaviour
 
     //tile placement based on mouse clicks
     private void Update() {
-
+        //only works if current scene is the editor
         if (sceneName == "Editor")
         {
-            Vector3Int pos = currentTilemap.WorldToCell(cam.ScreenToWorldPoint(Input.mousePosition));
+            Vector3Int pos = currentTilemap.WorldToCell(cam.ScreenToWorldPoint(Input.mousePosition));// get current mouse position on the screen
 
 
             if (terrain.toggle)
@@ -76,7 +86,7 @@ public class LevelEditor : MonoBehaviour
 
 
                 //select tiles with keyboard
-                if (Input.GetKeyDown(KeyCode.Alpha1))
+                if (Input.GetKeyDown(KeyCode.Alpha1))//change chosen tiles
                 {
 
                     selectedTileIndex++;
@@ -85,7 +95,7 @@ public class LevelEditor : MonoBehaviour
                     image.sprite = images[selectedTileIndex];
                     Debug.Log(Level_Manager.instance.tiles[selectedTileIndex].name);
                 }
-                if (Input.GetKeyDown(KeyCode.Alpha2))
+                if (Input.GetKeyDown(KeyCode.Alpha2))//
                 {
                     selectedTileIndex--;
                     if (selectedTileIndex < 0)

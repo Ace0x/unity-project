@@ -1,5 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
+/*
+==========================================
+ Title: Boss
+ Authors: 
+ Andrew Dunkerley, 
+ Emiliano Cabrera, 
+ Diego Corrales, 
+ Do Hyun Nam
+ Date: 14/06/2022
+==========================================
+*/
+
 using UnityEngine;
 
 public class Boss : Enemy {

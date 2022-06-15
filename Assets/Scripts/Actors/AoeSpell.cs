@@ -1,7 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
+/*
+==========================================
+ Title: AOE Spell
+ Authors: 
+ Andrew Dunkerley, 
+ Emiliano Cabrera, 
+ Diego Corrales, 
+ DO Hyun Nam
+ Date: 14/06/2022
+==========================================
+*/
+
 using UnityEngine;
-using UnityEngine.SceneManagement;
+
 
 public class AoeSpell : Collectable {
     protected float spellRange = 0.5f;

@@ -1,3 +1,14 @@
+/*
+==========================================
+ Title: Delete Item
+ Authors: 
+ Andrew Dunkerley, 
+ Emiliano Cabrera, 
+ Diego Corrales, 
+ Do Hyun Nam
+ Date: 14/06/2022
+==========================================
+*/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,7 +31,7 @@ public class deleteItem : MonoBehaviour
         sceneName = currentScene.name;
 
     }
-
+    //Deletes Items in the level editor on right click when hovered
     private void OnMouseOver()
     {
         if(sceneName == "Editor")

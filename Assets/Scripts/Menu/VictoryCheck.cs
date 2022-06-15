@@ -1,3 +1,15 @@
+/*
+==========================================
+ Title: Victory Check
+ Authors: 
+ Andrew Dunkerley, 
+ Emiliano Cabrera, 
+ Diego Corrales, 
+ DO Hyun Nam
+ Date: 14/06/2022
+==========================================
+*/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +19,7 @@ using System;
 
 public class VictoryCheck : MonoBehaviour
 {
+    //If all bosses are defeated add wins to current logged in player through put mehtod
 
     List<GameObject> Bosses = new List<GameObject>();
     public LevelStats lvlStats;

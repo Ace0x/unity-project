@@ -1,5 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
+/*
+==========================================
+ Title: Player
+ Authors: 
+ Andrew Dunkerley, 
+ Emiliano Cabrera, 
+ Diego Corrales, 
+ DO Hyun Nam
+ Date: 14/06/2022
+==========================================
+*/
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class Player : Mover 

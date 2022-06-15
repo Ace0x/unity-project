@@ -2210,8 +2210,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3.9, y: -1}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 0, y: 9.3}
+  m_SizeDelta: {x: 25.774, y: 25.774}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &613941656
 MonoBehaviour:
@@ -2296,7 +2296,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 87.505745, y: 11.238165, z: 85.10971, w: 11.18689}
+  m_margin: {x: 3.101729, y: 11.238165, z: 1.0439329, w: -8.503838}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -3894,7 +3894,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -1.2099915}
+  m_AnchoredPosition: {x: 0, y: -1.2099609}
   m_SizeDelta: {x: -401.3, y: -175.79}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &894601616
@@ -8915,15 +8915,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8919871255513221157, guid: 0932133cd3efd2e4a9af6bbde0a69488, type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8919871255513221157, guid: 0932133cd3efd2e4a9af6bbde0a69488, type: 3}
       propertyPath: m_Color.g
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8919871255513221157, guid: 0932133cd3efd2e4a9af6bbde0a69488, type: 3}
       propertyPath: m_Color.r
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8919871255513221159, guid: 0932133cd3efd2e4a9af6bbde0a69488, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -8935,15 +8935,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8919871255977005444, guid: 0932133cd3efd2e4a9af6bbde0a69488, type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8919871255977005444, guid: 0932133cd3efd2e4a9af6bbde0a69488, type: 3}
       propertyPath: m_Color.g
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8919871255977005444, guid: 0932133cd3efd2e4a9af6bbde0a69488, type: 3}
       propertyPath: m_Color.r
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8919871255977005445, guid: 0932133cd3efd2e4a9af6bbde0a69488, type: 3}
       propertyPath: m_AnchoredPosition.x

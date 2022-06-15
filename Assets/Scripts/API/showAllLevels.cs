@@ -1,3 +1,15 @@
+/*
+==========================================
+ Title: Show All Levels
+ Authors: 
+ Andrew Dunkerley, 
+ Emiliano Cabrera, 
+ Diego Corrales, 
+ DO Hyun Nam
+ Date: 14/06/2022
+==========================================
+*/
+
 using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections;
@@ -56,7 +68,7 @@ public class showAllLevels : MonoBehaviour
     }
 
 
-    public IEnumerator GetLevels()
+    public IEnumerator GetLevels() //gets levels for level selector
     {
         using (UnityWebRequest www = UnityWebRequest.Get(constring))
         {
@@ -83,7 +95,7 @@ public class showAllLevels : MonoBehaviour
             {
                 if (www.downloadHandler.text != "null")
                 {
-                    string raw = www.downloadHandler.text;
+                    string raw = www.downloadHandler.text; 
                     string raw2 = "{ \"u\":" + raw + "}";
                  
                     users = JsonUtility.FromJson<Users>(raw2);
@@ -95,14 +107,15 @@ public class showAllLevels : MonoBehaviour
                 Debug.Log("Error: " + www.error);
             }
         }
-        GameObject.Find("Retain").gameObject.GetComponent<RetainOnLoad>().lvl = lsx.ls;
+        GameObject.Find("Retain").gameObject.GetComponent<RetainOnLoad>().lvl = lsx.ls; //compares all ids in the user list to the current loaded level
+                                                                                        //creator id to determine the corresponing username
         lsx.ls.Sort((x, y) => x.id.CompareTo(y.id));
         if (load)
             dislpayLevels(lsx.ls);
         load = false;
     }
 
-    public void dislpayLevels(List<Level> levels)
+    public void dislpayLevels(List<Level> levels) //displays all the obtained levels
     {
         for (int i = 0; i < levels.Count; i++)
         {

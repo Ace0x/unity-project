@@ -1,3 +1,14 @@
+/*
+==========================================
+ Title: Play Test
+ Authors: 
+ Andrew Dunkerley, 
+ Emiliano Cabrera, 
+ Diego Corrales, 
+ Do Hyun Nam
+ Date: 14/06/2022
+==========================================
+*/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +23,7 @@ public class PlayTest : MonoBehaviour
    
     // Update is called once per frame
 
-   
+   //editor play and freeze funcions for playtest
     void Update()
     {
         if (pressEdit)

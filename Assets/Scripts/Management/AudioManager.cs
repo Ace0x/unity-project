@@ -1,3 +1,15 @@
+/*
+==========================================
+ Title: Audio Manager
+ Authors: 
+ Andrew Dunkerley, 
+ Emiliano Cabrera, 
+ Diego Corrales, 
+ DO Hyun Nam
+ Date: 14/06/2022
+==========================================
+*/
+
 using UnityEngine.Audio;
 using System;
 using UnityEngine;
