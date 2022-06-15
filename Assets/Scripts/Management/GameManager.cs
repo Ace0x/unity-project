@@ -97,7 +97,9 @@ public class GameManager : MonoBehaviour
 
         if (camMotor == null && GameObject.FindGameObjectWithTag("MainCamera") != null)
             camMotor = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraMotor>();
-        
+
+        if (GameObject.Find("LevelText") != null && levelText == null)
+            levelText = GameObject.Find("LevelText").gameObject.GetComponent<LevelText>();
 
         if (camMotor.lookAt == null && GameObject.Find("Player") != null)
             camMotor.lookAt = GameObject.Find("Player").transform;
