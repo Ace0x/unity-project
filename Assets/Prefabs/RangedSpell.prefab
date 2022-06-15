@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4156519199748790322}
   - component: {fileID: 2111274045438518694}
   - component: {fileID: 2548152565444417680}
+  - component: {fileID: -8065578065502397079}
   m_Layer: 0
   m_Name: RangedSpell
   m_TagString: Game
@@ -140,3 +141,17 @@ MonoBehaviour:
     maxNormalAngle: 0
   projectile: {fileID: 6117693353928711164, guid: 5b351c347afd3d64ba55c08a92be3502, type: 3}
   faithCost: 1
+  inventory: {fileID: 0}
+--- !u!114 &-8065578065502397079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8182193833336220142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5c74d2e70401e24b93f533abc61c737, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: 11
