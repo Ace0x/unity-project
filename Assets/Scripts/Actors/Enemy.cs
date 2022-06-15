@@ -34,7 +34,6 @@ public class Enemy : Mover {
     public ContactFilter2D filter;
     private BoxCollider2D hitbox;
 
-    // This class cannot inherit from Collidable class, so we have to copy the logic
     // Array of things it is colliding with
     private Collider2D[] hits = new Collider2D[10];
 

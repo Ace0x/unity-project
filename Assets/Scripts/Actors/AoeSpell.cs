@@ -27,6 +27,7 @@ public class AoeSpell : Collectable {
         lastUse = 1.0f;
         getPlayer();
     }
+
     public override void Update()
     {
         base.Update();
@@ -39,74 +40,64 @@ public class AoeSpell : Collectable {
     private void getPlayer()
     {
         // Assign the position of the player through GameManager
-            if(GameObject.Find("Player") != null && GameObject.Find("SpawnPoint") != null)
-                inventory = GameObject.Find("Player").gameObject.GetComponent<SpellInventory>();
-
-            
-        
+        if(GameObject.Find("Player") != null && GameObject.Find("SpawnPoint") != null)
+            inventory = GameObject.Find("Player").gameObject.GetComponent<SpellInventory>();
     }
 
-    protected override void OnCollect() {
-       
-            inventory.AddSpell(gameObject); // Add the spell to the inventory
-            GetComponent<Collider2D>().enabled = false;
-        
-            
-
-        // Disable the sprite renderer and the box collider of the object
-        
+    protected override void OnCollect() 
+    {       
+        inventory.AddSpell(gameObject); // Add the spell to the inventory
+        GetComponent<Collider2D>().enabled = false; // Disable the sprite renderer and the box collider of the object
     }
 
-    public override void Activate() {
-        
-            // If more time has passed than the cooldown, the player can use the spell
-            if (Time.time - lastUse > cooldown)
+    public override void Activate() 
+    {    
+        // If more time has passed than the cooldown, the player can use the spell
+        if (Time.time - lastUse > cooldown)
+        {
+            if (GameManager.instance.player.faith > faithCost)
             {
-                if (GameManager.instance.player.faith > faithCost)
+                // Reset lastUse as current time
+                lastUse = Time.time;
+
+                // List of colliders that oerlap with the spell's circular hitbox
+                Collider2D[] collidedBoxes = Physics2D.OverlapCircleAll(GameManager.instance.player.transform.position, spellRange);
+                // When nothing is hit, continue to the next frame
+                for (int i = 0; i < collidedBoxes.Length; i++)
                 {
-                    // Reset lastUse as current time
-                    lastUse = Time.time;
+                    // When nothing is hit, continue
+                    if (collidedBoxes[i] == null)
+                        continue;
 
-                    // List of colliders that oerlap with the spell's circular hitbox
-                    Collider2D[] collidedBoxes = Physics2D.OverlapCircleAll(GameManager.instance.player.transform.position, spellRange);
-                    // When nothing is hit, continue to the next frame
-                    for (int i = 0; i < collidedBoxes.Length; i++)
+                    // Check if what is being collided with is a Fighter and is not the player
+                    if (collidedBoxes[i].tag == "Fighter" || collidedBoxes[i].tag == "Boss")
                     {
-                        // When nothing is hit, continue
-                        if (collidedBoxes[i] == null)
-                            continue;
-
-                        // Check if what is being collided with is a Fighter and is not the player
-                        if (collidedBoxes[i].tag == "Fighter" || collidedBoxes[i].tag == "Boss")
+                        if (collidedBoxes[i].name != "Player")
                         {
-                            if (collidedBoxes[i].name != "Player")
+                            // Create a Damage object
+                            Damage dmg = new Damage
                             {
-                                // Create a Damage object
-                                Damage dmg = new Damage
-                                {
-                                    damageAmount = spellDamage,
-                                    origin = GameManager.instance.player.transform.position,
-                                    pushForce = spellPushForce
-                                };
+                                damageAmount = spellDamage,
+                                origin = GameManager.instance.player.transform.position,
+                                pushForce = spellPushForce
+                            };
 
-                                collidedBoxes[i].SendMessage("RecieveDamage", dmg);
-                            }
+                            collidedBoxes[i].SendMessage("RecieveDamage", dmg);
                         }
                     }
-
-                    // Reduce the player faith by the cost of the spell
-                    GameManager.instance.player.UseFaith(faithCost);
-
-                    // Find the audio manager and play the AOE spell sound with it
-                    FindObjectOfType<AudioManager>().Play("AoeSpellSound");
                 }
-                else
-                {
-                    Debug.Log("Not enough faith.");
-                }
+
+                // Reduce the player faith by the cost of the spell
+                GameManager.instance.player.UseFaith(faithCost);
+
+                // Find the audio manager and play the AOE spell sound with it
+                FindObjectOfType<AudioManager>().Play("AoeSpellSound");
             }
-        
-  
+            else
+            {
+                Debug.Log("Not enough faith.");
+            }
+        }
     }
 
 }

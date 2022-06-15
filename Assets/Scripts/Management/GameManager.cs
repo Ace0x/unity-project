@@ -36,13 +36,13 @@ public class GameManager : MonoBehaviour
         }
         
         // Delete all PlayerPrefs once game is started up so xp and gold is lost 
-        //  when starting again
+        // when starting again
         PlayerPrefs.DeleteAll();
 
 
         instance = this;
         // Once the scene is loaded, SceneManager will go through all functions and execute them,
-        //  so we add the LoadState function at the end
+        // so we add the LoadState function at the end
         SceneManager.sceneLoaded += LoadState;
     }
 
@@ -174,7 +174,7 @@ public class GameManager : MonoBehaviour
     }
 
     // Function to call the Show form FloatinftextManager
-    //  This is included in Game Manager so it can be called from anywhere
+    // This is included in Game Manager so it can be called from anywhere
     public void ShowText(string message, int fontSize, Color color, Vector3 position, Vector3 motion, float duration) 
     {
         floatingTextManager.Show(message, fontSize, color, position, motion, duration);

@@ -37,8 +37,6 @@ public class Fighter : MonoBehaviour {
             lastImmune = Time.time;
             // Reduce hitpoints by the damage recieved
             hitpoint -= dmg.damageAmount;
-            // Get the vector resulting from the direction of damage and position of Fighter, normalize it
-            //  and multiply it by the push force of the damage source
             pushDirection = (transform.position - dmg.origin).normalized * dmg.pushForce;
 
             // Find the audio manager and play the recieve damage sound with it
@@ -56,6 +54,5 @@ public class Fighter : MonoBehaviour {
     }
 
     // Function to die
-    // It is empty because it will be used differently by its children (Player or Enemy)
     protected virtual void Death() {}
 }
